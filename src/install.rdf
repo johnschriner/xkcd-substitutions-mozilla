@@ -3,15 +3,16 @@
   <RDF:Description about="urn:mozilla:install-manifest">
 
     <!-- GUID and type -->
-    <em:id>cloud-to-butt@github.com</em:id>
+    <em:id>{d0f29443-d71c-402a-8d1c-8fef03a07720}</em:id>
     <em:type>2</em:type>
 
     <!-- Extension details -->
-    <em:name>Cloud To Butt</em:name>
-    <em:description>Replaces the text 'the cloud' with 'my butt'.</em:description>
-    <em:creator>Steven Frank</em:creator>
-    <em:developer>Chris Wright</em:developer>
-    <em:homepageURL>https://github.com/DaveRandom/cloud-to-butt-mozilla</em:homepageURL>
+    <em:name></em:name>
+    <em:description>Substitutes words with much more fun ones as inspired by XKCD comic 1288.</em:description>
+    <em:creator>Chris Wright</em:creator>
+    <em:developer>Logan Lopez</em:developer>
+    <em:contributor>Steven Frank</em:contributor>
+    <em:homepageURL>https://github.com/lizardlab/xkcd-substitutions-mozilla</em:homepageURL>
 
     <!-- Current version -->
     <em:version>1.0</em:version>
