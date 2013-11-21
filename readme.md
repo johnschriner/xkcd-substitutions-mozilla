@@ -5,17 +5,17 @@ Derived from the work of Chris Wright's [cloud-to-butt-mozilla](https://github.c
 
 ## Installing
 
-Download [XKCDSubstition.xpi](https://github.com/lizardlab/xkcd-substitutions-mozilla/blob/master/XKCDSubstition.xpi?raw=true)
+Download [XKCDSubstitution.xpi](https://github.com/lizardlab/xkcd-substitutions-mozilla/blob/master/XKCDSubstitution.xpi?raw=true)
 
 
 ## Building
 
 1. Download the code, open FireFox.
 2. Create whatever edits you have or audit it, whatever.
-3. Save the file as a .zip and then rename the file extension to .xpi
+3. Save the file as a .zip and then rename the file extension to .xpi.
 4. Click *Add-ons* from the *Tools* menu and select the *Extensions* tab.
 5. Drag-and-drop the XPI file onto the page.
-6. Enjoy reading the news in style
+6. Enjoy reading the news in style.
 
 ## Chrome version
 

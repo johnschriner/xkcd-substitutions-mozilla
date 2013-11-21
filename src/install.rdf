@@ -7,10 +7,10 @@
     <em:type>2</em:type>
 
     <!-- Extension details -->
-    <em:name></em:name>
+    <em:name>XKCD Substitutions</em:name>
     <em:description>Substitutes words with much more fun ones as inspired by XKCD comic 1288.</em:description>
-    <em:creator>Chris Wright</em:creator>
-    <em:developer>Logan Lopez</em:developer>
+    <em:creator>Logan Lopez</em:creator>
+    <em:developer>Chris Wright</em:developer>
     <em:contributor>Steven Frank</em:contributor>
     <em:homepageURL>https://github.com/lizardlab/xkcd-substitutions-mozilla</em:homepageURL>
 
