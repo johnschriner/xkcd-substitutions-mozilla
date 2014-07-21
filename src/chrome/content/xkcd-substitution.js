@@ -13,6 +13,7 @@ function xkcdMunge(doc) {
         "new Study": "Tumblr Post",
         "New study": "Tumblr post",
         "NEW STUDY": "TUMBLR POST",
+        "new study": "Tumblr post",
         "Rebuild": "Avenge",
         "rebuild": "avenge",
         "REBUILD": "AVENGE",
