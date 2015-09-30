@@ -36,7 +36,7 @@ function xkcdMunge(doc) {
         "SENATOR": "ELF-LORD",
         "Car": "Cat",
         "car": "cat",
-        "CAT": "CAT",
+        "CAR": "CAT",
         "Election": "Eating contest",
         "election": "eating contest",
         "ELECTION": "EATING CONTEST",
