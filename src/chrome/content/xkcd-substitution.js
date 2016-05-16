@@ -101,6 +101,12 @@
         v = v.replace(/\bsilver\sbullet\b/g, "way to kill werewolves");
         v = v.replace(/\bsubway\ssystem\b/g, "tunnels I found");
         v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bwar\sof\swords\b/g, "interplanetary war");
+        v = v.replace(/\btension\b/g, "sexual tension");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
         
         
         textNode.nodeValue = v;
