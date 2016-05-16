@@ -1,148 +1,120 @@
-// This was all not my code, I just edited the word replacement part
-// mozilla folks rejected it because performance issues, but were nice
-// and gave me replacement code to make it faster
-function xkcdMunge(doc) {
-    var substitutions = {
-        "Witnesses": "These dudes I know",
-        "witnesses": "these dudes I know",
-        "WITNESSES": "THESE DUDE I KNOW",
-        "Allegedly": "Kinda probably",
-        "allegedly": "kinda probably",
-        "ALLEGEDLY": "KINDA PROBABLY",
-        "New Study": "Tumblr Post",
-        "new Study": "Tumblr Post",
-        "New study": "Tumblr post",
-        "NEW STUDY": "TUMBLR POST",
-        "new study": "Tumblr post",
-        "Rebuild": "Avenge",
-        "rebuild": "avenge",
-        "REBUILD": "AVENGE",
-        "Space": "Spaaace",
-        "space": "spaaace",
-        "SPACE": "SPAACE",
-        "Google Glass": "Virtual Boy",
-        "Google glass": "Virtual boy",
-        "google Glass": "virtual Boy",
-        "google glass": "virtual boy",
-        "GOOGLE GLASS": "VIRTUAL BOY",
-        "Smartphone": "Pokédex",
-        "smartphone": "pokédex",
-        "SMARTPHONE": "POKÉDEX",
-        "Electric": "Atomic",
-        "electric": "atomic",
-        "ELECTRIC": "ATOMIC",
-        "Senator": "Elf-lord",
-        "senator": "elf-lord",
-        "SENATOR": "ELF-LORD",
-        "Car": "Cat",
-        "car": "cat",
-        "CAR": "CAT",
-        "Election": "Eating contest",
-        "election": "eating contest",
-        "ELECTION": "EATING CONTEST",
-        "Congressional Leaders": "River Spirits",
-        "Congressional leaders": "River spirits",
-        "congressional Leaders": "river Spirits",
-        "congressional leaders": "river spirits",
-        "CONGRESSIONAL LEADERS": "RIVER SPIRITS",
-        "Homeland Security": "Homestar Runner",
-        "Homeland security": "Homestar runner",
-        "homeland Security": "homestar Runner",
-        "homeland security": "homestar runner",
-        "HOMELAND SECURITY": "HOMESTAR RUNNER",
-        "Could not be reached for comment": "Is guilty and everyone knows it",
-        "could not be reached for comment": "is guilty and everyone knows it",
-        "Debate": "Dance-off",
-        "debate": "dance-off",
-        "Self driving": "Uncontrollably swerving",
-        "self driving": "uncontrollably swerving",
-        "Poll": "Psychic reading",
-        "poll": "psychic reading",
-        "Candidate": "Airbender",
-        "candidate": "airbender",
-        "Drone": "Dog",
-        "drone": "dog",
-        "Vows to": "Probably won't",
-        "vows to": "probably won't",
-        "At large": "Very large",
-        "at large": "very large",
-        "Successfully": "Suddenly",
-        "successfully": "suddenly",
-        "Expands": "Physically expands",
-        "expands": "physically expands",
-        "First-degree": "Friggin' awful",
-        "first-degree": "friggin' awful",
-        "Second-degree": "Friggin' awful",
-        "second-degree": "friggin' awful",
-        "Third-degree": "Friggin' awful",
-        "third-degree": "friggin' awful",
-        "An unknown number": "Like hundreds",
-        "an unknown number": "like hundreds",
-        "Front runner": "Blade runner",
-        "front runner": "blade runner",
-        "Global": "Spherical",
-        "global": "spherical",
-        "Years": "Minutes",
-        "years": "minutes",
-        "Minutes": "Years",
-        "minutes": "years",
-        "No indication": "Lots of signs",
-        "no indication": "lots of signs",
-        "Urged restraint by": "Drunkenly egged on",
-        "urged restraint by": "drunkenly egged on",
-        "gaffe": "magic spell",
-        "GAFFE": "MAGIC SPELL",
-        "Star-studded": "Blood-soaked",
-        "star-studded": "blood-soaked",
-        "remains to be seen": "will never be known",
-        "silver bullet": "way to kill werewolves",
-        "subway system": "tunnels I found",
-        "surprising": "surprising (but not to me)",
-        "Surprising": "Surprising (but not to me)",
-        "war of words": "interplanetary war",
-        "tension": "sexual tension",
-        "Tension": "Sexual tension",
-        "cautiously optimistic": "delusional",
-        "CAUTIOUSLY OPTIMISTIC": "DELUSIONAL",
-        "Docter Who": "The Big Bang Theory",
-        "win votes": "find Pokemon",
-        "behind the headlines": "beyond the grave",
-        "email": "poem",
-        "Facebook post": "poem",
-        "Tweet": "poem",
-        "Facebook CEO": "This guy",
-        "Latest": "Final",
-        "latest": "final",
-        "disrupt": "destroy",
-        "meeting": "menage a trois",
-        "Meeting": "menage a trois",
-        "scientists": "Channing Tatum and his friends",
-        "Scientists": "Channing Tatum and his friends",
-        "you won't believe": "I'm really sad about",
-        "You won't believe": "I'm really sad about",
-        "YOU WON'T BELIEVE": "I'M REALLY SAD ABOUT",
-    };
+(function() {
 
-    var xpath = "//text()[" + Object.keys(substitutions)
-                                    .map(s => 'contains(., "' + s + '")')
-                                    .join(" or ") + "]";
-
-    var pattern = RegExp("\\b(" + Object.keys(substitutions)
-                                        .join("|") + ")\\b", "g");
-
-
-    for (let node in findXPath(xpath, doc.body || doc.documentElement))
-        node.textContent = node.textContent.replace(pattern, (m0, m1) => substitutions[m1]);
-
-    function findXPath(expression, elem) {
-        let doc = elem.ownerDocument || elem;
-
-        let resolver = n => null;
-        let iterator = doc.evaluate(expression, elem, resolver,
-                                    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
-                                    null);
-
-        for (let i = 0; i < iterator.snapshotLength; i++)
-            yield iterator.snapshotItem(i);
+    function walk(node) 
+    {
+        // I stole this function from here:
+        // http://is.gd/mwZp7E
+    
+        var child, next;
+    
+        switch ( node.nodeType )  
+        {
+            case 1:  // Element
+            case 9:  // Document
+            case 11: // Document fragment
+                child = node.firstChild;
+                while ( child ) 
+                {
+                    next = child.nextSibling;
+                    walk(child);
+                    child = next;
+                }
+                break;
+    
+            case 3: // Text node
+                handleText(node);
+                break;
+        }
     }
-}
+    
+    function handleText(textNode)
+    {
+        var v = textNode.nodeValue;
+        v = v.replace(/cloud/g, "butt");
+        v = v.replace(/Cloud/g, "Butt");
+        v = v.replace(/clouds/g, "butts");
+        v = v.replace(/Clouds/g, "Butts");
+    	v = v.replace(/\bthe\switnesses\b/g, "these dudes I know");
+        v = v.replace(/\bThe\sWitnesses\b/g, "These dudes I know");
+    	v = v.replace(/\bthe\sWitnesses\b/g, "these dudes I know");
+        v = v.replace(/\bThe\switnesses\b/g, "These dudes I know");
+        v = v.replace(/\bwitnesses\b/g, "these dudes I know");
+        v = v.replace(/\bWitnesses\b/g, "These dudes I know");
+        v = v.replace(/\bwitness\b/g, "this dude I know");
+        v = v.replace(/\bWitness\b/g, "This dude I know");
+        v = v.replace(/\ballegedly\b/g, "kinda probably");
+        v = v.replace(/\bAllegedly\b/g, "Kinda probably");
+        v = v.replace(/\bnew\sstudies\b/g, "Tumblr posts");
+        v = v.replace(/\bNew\sstudies\b/g, "Tumblr posts");
+        v = v.replace(/\bnew\sStudies\b/g, "Tumblr Posts");
+        v = v.replace(/\bNew\sStudies\b/g, "Tumblr Posts");
+        v = v.replace(/\bnew\sstudy\b/g, "Tumblr post");
+        v = v.replace(/\bNew\sstudy\b/g, "Tumblr post");
+        v = v.replace(/\bnew\sStudy\b/g, "Tumblr Post");
+        v = v.replace(/\bNew\sStudy\b/g, "Tumblr Post");
+        v = v.replace(/\brebuild\b/g, "avenge");
+        v = v.replace(/\bRebuild\b/g, "Avenge");
+        v = v.replace(/\bspace\b/g, "spaaace");
+        v = v.replace(/\bSpace\b/g, "Spaaace");
+        v = v.replace(/\bGoogle\sGlass\b/g, "Virtual Boy");
+        v = v.replace(/\bgoogle\sglass\b/g, "virtual boy");
+        v = v.replace(/\bgoogle\sGlass\b/g, "virtual boy");
+        v = v.replace(/\bGoogle\sglass\b/g, "Virtual Boy");
+        v = v.replace(/\bsmartphones\b/g, "pokédexes");
+        v = v.replace(/\bSmartphones\b/g, "Pokédexes");
+        v = v.replace(/\bsmartphone\b/g, "pokédex");
+        v = v.replace(/\bSmartphone\b/g, "Pokédex");
+        v = v.replace(/\belectric\b/g, "atomic");
+        v = v.replace(/\bElectric\b/g, "Atomic");
+        v = v.replace(/\bsenators\b/g, "elf-lords");
+        v = v.replace(/\bSenators\b/g, "Elf-lords");
+        v = v.replace(/\bsenator\b/g, "elf-lord");
+        v = v.replace(/\bSenator\b/g, "Elf-lord");
+        v = v.replace(/\bcars\b/g, "cats");
+        v = v.replace(/\bCars\b/g, "Cats");
+        v = v.replace(/\bcar\b/g, "cat");
+        v = v.replace(/\bCar\b/g, "Cat");
+        v = v.replace(/\belections\b/g, "eating contests");
+        v = v.replace(/\bElections\b/g, "Eating Contests");
+        v = v.replace(/\belection\b/g, "eating contest");
+        v = v.replace(/\bElection\b/g, "Eating Contest");
+        v = v.replace(/\bcongressional\sleaders\b/g, "river spirits");
+        v = v.replace(/\bCongressional\sleaders\b/g, "River spirits");
+        v = v.replace(/\bcongressional\sLeaders\b/g, "river spirits");
+        v = v.replace(/\bCongressional\sLeaders\b/g, "River Spirits");
+        v = v.replace(/\bcongressional\sleader\b/g, "river spirit");
+        v = v.replace(/\bCongressional\sleader\b/g, "River spirit");
+        v = v.replace(/\bcongressional\sLeader\b/g, "river spirit");
+        v = v.replace(/\bCongressional\sLeader\b/g, "River Spirit");
+        v = v.replace(/\bHomeland\ssecurity\b/g, "Homestar runner");
+        v = v.replace(/\bHomeland\sSecurity\b/g, "Homestar Runner");
+        v = v.replace(/\bhomeland\ssecurity\b/g, "homestar runner");
+        v = v.replace(/\bhomeland\sSecurity\b/g, "homestar Runner");
+        v = v.replace(/\bcould\snot\sbe\sreached\sfor\scomment\b/gi, "is guilty and everyone knows it");
+        v = v.replace(/\bgaffe\b/g, "gaffe");
+        v = v.replace(/\bGaffe\b/g, "Gaffe");
+        v = v.replace(/\bancient\b/g, "haunted");
+        v = v.replace(/\bAncient\b/g, "Haunted");
+        v = v.replace(/\bstar\-studded\b/g, "blood-soaked");
+        v = v.replace(/\bStar\-studded\b/g, "Blood-soaked");
+        v = v.replace(/\bremains\sto\sbe\sseen\b/g, "will never be known");
+        v = v.replace(/\bsilver\sbullet\b/g, "way to kill werewolves");
+        v = v.replace(/\bsubway\ssystem\b/g, "tunnels I found");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        
+        
+        textNode.nodeValue = v;
+    }
+
+    function windowLoadHandler()
+    {
+        // Dear Mozilla: I hate you for making me do this.
+        window.removeEventListener('load', windowLoadHandler);
+
+        document.getElementById('appcontent').addEventListener('DOMContentLoaded', function(e) {
+            walk(e.originalTarget.body);
+        });
+    }
+
+    window.addEventListener('load', windowLoadHandler);
+}());
