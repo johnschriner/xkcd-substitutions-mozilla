@@ -100,13 +100,23 @@
         v = v.replace(/\bremains\sto\sbe\sseen\b/g, "will never be known");
         v = v.replace(/\bsilver\sbullet\b/g, "way to kill werewolves");
         v = v.replace(/\bsubway\ssystem\b/g, "tunnels I found");
-        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bsurprising\b/g, "surprising (but not to me)");
         v = v.replace(/\bwar\sof\swords\b/g, "interplanetary war");
         v = v.replace(/\btension\b/g, "sexual tension");
-        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
-        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
-        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
-        v = v.replace(/\bsurprising\b/g, "surprising (but not to me");
+        v = v.replace(/\bcautiously\soptimistic\b/g, "delusional");
+        v = v.replace(/\bDoctor\sWho\b/g, "The Big Bang Theory");
+        v = v.replace(/\bwin\svotes\b/g, "find Poke\&#769;mon");
+        v = v.replace(/\bbehind the headlines\b/g, "beyond the grave");
+        v = v.replace(/\bFacebook\spost\b/g, "poem");
+        v = v.replace(/\bFacebook\sCEO\b/g, "This guy");
+        v = v.replace(/\bTweet\b/g, "poem");
+        v = v.replace(/\bemail\b/g, "poem");
+        v = v.replace(/\blatest\b/g, "final");
+        v = v.replace(/\bdisrupt\b/g, "destroy");
+        v = v.replace(/\bmeeting\b/g, "me\&#769;nage a\&#768; trois");
+        v = v.replace(/\bscientists\b/g, "Channing Tatum and his friends");
+        v = v.replace(/\bScientists\b/g, "Channing Tatum and his friends");
+        v = v.replace(/\byou\swon\'t\sbelieve\b/g, "I'm really sad about");
         
         
         textNode.nodeValue = v;
