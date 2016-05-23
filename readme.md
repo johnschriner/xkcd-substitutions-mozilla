@@ -3,7 +3,7 @@ Forked from LizardLab
 
 Derived from the work of Chris Wright's [cloud-to-butt-mozilla](https://github.com/DaveRandom/cloud-to-butt-mozilla) Firefox extension. Based on the [XKCD comic](http://xkcd.com/1288) on a suggestion of how to make the news more fun.
 
-
+This version includes the newer substitutions from XKCD's [Substitutions 3](https://xkcd.com/1679/)
 ## Installing
 
 Download [XKCD-sub3.xpi](https://github.com/johnschriner/xkcd-substitutions-mozilla/blob/master/XKCD-sub3.xpi?raw=true)
