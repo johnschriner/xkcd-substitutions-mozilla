@@ -1,5 +1,5 @@
 # xkcd-substitution-mozilla
-Forked from LizardLab
+Forked from [LizardLab](https://github.com/lizardlab/xkcd-substitutions-mozilla)
 
 Derived from the work of Chris Wright's [cloud-to-butt-mozilla](https://github.com/DaveRandom/cloud-to-butt-mozilla) Firefox extension. Based on the [XKCD comic](http://xkcd.com/1288) on a suggestion of how to make the news more fun.
 
